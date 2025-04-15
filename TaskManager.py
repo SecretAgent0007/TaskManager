@@ -5,17 +5,23 @@ show -  напечатать все добавленные задачи."""
 
 tasks = []
 
-command = input("Введите команду: ")
-if command == "help":
-  print(HELP)
+run = True
 
-elif  command == "show":
-  print(tasks)
+while run:
+  command = input("Введите команду: ")
+  if command == "help":
+    print(HELP)
 
-elif  command == "add":
-  task = input("Введите название задачи: ")
-  tasks.append(task)
-  print("Задача добавлена")
+  elif  command == "show":
+    print(tasks)
 
-else:
-  print("Неизвестная команда")
+  elif  command == "add":
+    task = input("Введите название задачи: ")
+    tasks.append(task)
+    print("Задача добавлена")
+
+  else:
+    print("Неизвестная команда")
+    break
+
+print("До свидания!")
