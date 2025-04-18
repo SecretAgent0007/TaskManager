@@ -1,43 +1,47 @@
+import random as rnd
+
 HELP = """
 help - напечатать справку по программе.
-add -  добавить задачу в список (название задачи запрашиваем у пользователя).
+add -  добавить задачу в список.
 show -  напечатать все добавленные задачи.
-exit -  выход из программы."""
+random - добавить случайную задачу на дату Сегодня."""
 
-today = []
-tomorrow = []
-other = []
+random_tasks = ["Записаться на курс в Нетологию", "Написать Гвидо письмо", "Покормить кошку", "Помыть машину"]
+
+tasks = {
+  
+}
 
 run = True
+
+def add_todo(date, task):
+  if date in tasks:
+    tasks[date].append(task)
+  else:
+    tasks[date] = []
+    tasks[date].append(task)
+  print("Задача ", task, "добавлена на дату", date)
 
 while run:
   command = input("Введите команду: ")
   if command == "help":
     print(HELP)
-
   elif  command == "show":
-    print("Сегодня")
-    print(today)
-    print("Завтра")
-    print(tomorrow)
-    print("Другая дата")
-    print(other)
-
+    date = input("Введите дату для отображения списка задач: ")
+    if date in tasks:
+      for task in tasks[date]:
+        print('- ', task)
+    else:
+      print("Такой даты нет")
   elif  command == "add":
-    task_2 = input("Выберете дату задачи: 1 - сегодня, 2 - завтра, 3 - другая дата :")
+    date = input("Введите дату для добавления задачи: ")
     task = input("Введите название задачи: ")
-    if task_2 == "1":
-      today.append(task)
-    elif task_2 == "2":
-      tomorrow.append(task)
-    elif task_2 == "3":
-      other.append(task)
-    print("Задача добавлена")
-
-  elif  command == "exit":
-    print("Спасибо за использование! До свидания!")
-    break
-
+    add_todo(date, task)
+  elif command == "random":
+    task = rnd.choice(random_tasks)
+    add_todo("Сегодня", random_tasks)
   else:
     print("Неизвестная команда")
     break
+
+print("Спасибо за использование! До свидания!")
